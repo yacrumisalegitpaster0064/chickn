@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Page information -->
+    <title>Animated particles</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <!-- Animated particles scripts -->
+    <script type="text/javascript" src="../js/particles.js?8184"></script>
+</head>
+<body>
+
+    <div id="particles-container">
+        <canvas id="particles-canvas"></canvas>
+    </div>
+
+    <script>
+        // self executing function here (compatibility with all browsers)
+        (function() {
+            let settings = {
+                //General settings
+                disableOnMobile: -1, // If set to true (1), the script is disabled for mobile users
+
+                // Handler settings (-1 = default)
+                amount: -1, // number of particles
+                amountMin: -1, // min number of particles (useful if dynamicAmount is set to true)
+                amountMax: -1, // max number of particles (useful if dynamicAmount is set to true)
+                dynamicAmount: -1, // if set to true (1), the particle amount changes proportionally with the new window size
+                tolerance: -1, // distance from which lines will be drawn
+                lineWidth: -1, // width of the lines between particles
+
+                // Particles settings (random between min and max)
+                 // the size of particle
+                sizeMin: -1,
+                sizeMax: -1,
+                // position of a particle
+                positionXMin: -1,
+                positionXMax: -1,
+                positionYMin: -1,
+                positionYMax: -1,
+                // speed of a particle
+                speedMin: -1,
+                speedMax: -1, 
+                // direction of a particle (in radians)
+                directionMin: -1,
+                directionMax: -1,
+                // color of a particle (HSL color from 0 to 360)
+                colorMin: -1,
+                colorMax: -1,
+
+                // Interaction settings (if the mouse goes in or out of the canvas)
+                multiplierIn: -1,  // multiplier if the mouse is in the canvas
+                multiplierOut: -1, // multiplier if the mouse is out of the canvas
+
+                // Color of springs
+                springColorR: -1, // spring color (RED) >=0 & <= 255
+                springColorG: -1, // spring color (GREEN) >=0 & <= 255
+                springColorB: -1  // spring color (NLUE) >=0 & <= 255
+            };
+            let particlesHandler = new ParticlesHandler("particles-canvas", settings, false);
+            particlesHandler.start();
+
+            let i = 1;
+            let gradient = function(){
+                let settings = particlesHandler.settings;
+                settings.colorMin = i;
+                settings.colorMax = i;
+                particlesHandler.settings= settings;
+                i++;
+                if(i > 360) i = 0;
+            };
+            setInterval(gradient, 20);
+
+            // let speedy = function(){
+            //     let settings = particlesHandler.settings;
+            //     settings.speedMin = 4;
+            //     settings.speedMax = 5;
+            //     particlesHandler.settings = settings;
+            // }
+            // speedy();
+
+            // let changeArea = function(){
+            //     settings = particlesHandler.settings;
+            //     settings.positionXMin = 20;
+            //     settings.positionXMax = 50;
+            //     settings.positionYMax = 5;
+            //     settings.positionYMax = 100;
+            //     particlesHandler.settings = settings;
+            // }
+            // setInterval(changeArea, 3000);
+        })();
+    </script>
+</body>
+</html>
